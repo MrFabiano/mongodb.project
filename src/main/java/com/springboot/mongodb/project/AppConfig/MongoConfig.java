@@ -7,7 +7,6 @@ import com.mongodb.client.MongoClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
-import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -20,7 +19,10 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
     protected String getDatabaseName() {
         return "mongodb";
     }
-
+    
+    /*
+    ConnectionString: é o seu endereço no monogDB
+    */
     @Bean
     public MongoClient mongoClient(){
         ConnectionString connectionString = new ConnectionString("mongodb+srv://mongodbjavaspring05:CASA_JAVA@cluster0.fzg9tyo.mongodb.net");
