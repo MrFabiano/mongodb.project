@@ -5,6 +5,7 @@ import com.springboot.mongodb.project.repository.TutorialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,5 +25,15 @@ public class TutorialService {
 
     public List<Tutorial> readTutorials() {
         return tutorialRepository.findAll();
+    }
+
+    public List<Tutorial> buscarTutotorial(Tutorial tutorial, String title, String description, boolean publiched){
+       List<Tutorial> listTutorial = tutorialRepository.findByTitleContaining(title, description, false);
+        if(listTutorial!=null && listTutorial.isEmpty()){
+            tutorialRepository.save(tutorial);
+        }else{
+            tutorialRepository.findByTitleContaining(title, description, false);
+        }
+        return listTutorial;
     }
 }

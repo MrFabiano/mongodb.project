@@ -36,13 +36,15 @@ public class TutorialController {
     }
 
     @GetMapping(value = "/tutorials")
-    public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title) {
+    public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title,
+                                                          @RequestParam(required = false) String description,
+                                                          @RequestParam(required = false) boolean publiched) {
         try {
             List<Tutorial> tutorials = new ArrayList<Tutorial>();
             if (title == null)
                 tutorialRepository.findAll().forEach(tutorials::add);
             else
-                tutorialRepository.findByTitleContaining(title).forEach(tutorials::add);
+                tutorialRepository.findByTitleContaining(title, description, publiched).forEach(tutorials::add);
             if (tutorials.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -53,17 +55,16 @@ public class TutorialController {
     }
 
     @GetMapping(value = "/tutorials/")
-    public ResponseEntity readTutorials(@RequestParam(required = false) String title) {
-        try{
-            if (title == null) {
-                return ResponseEntity.ok(tutorialService.readTutorials());
-            }
-            return ResponseEntity.ok(tutorialService.readTutorialTitle(title));
-        }catch (Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public  ResponseEntity<List<Tutorial>> readTutorials(Tutorial tutorial, @RequestParam(required = false) String title,
+                                                                            @RequestParam(required = false) String description, 
+                                                                            @RequestParam(required = false) boolean publiched) {
+
+       
+          
+        return new ResponseEntity<>(tutorialService.buscarTutotorial(tutorial, title, description, false), HttpStatus.OK);
 
     }
 }
+
 
 
