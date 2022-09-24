@@ -20,12 +20,10 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
         return "mongodb";
     }
     
-    /*
-    ConnectionString: é o seu endereço no monogDB
-    */
+ 
     @Bean
     public MongoClient mongoClient(){
-        ConnectionString connectionString = new ConnectionString("mongodb+srv://mongodbjavaspring05:CASA_JAVA@cluster0.fzg9tyo.mongodb.net");
+        ConnectionString connectionString = new ConnectionString("mongodb+srv://seuenderecodebanco");
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
                 .build();
