@@ -1,0 +1,7 @@
+server:
+  port: 2020
+
+mongodb:
+  username: ${MONGODB_USERNAME:mongodbjavaspring05}
+  password: ${MONGODB_PASSWORD:CASA_JAVA}
+  host: ${MONGODB_HOST:cluster0.fzg9tyo.mongodb.net}
