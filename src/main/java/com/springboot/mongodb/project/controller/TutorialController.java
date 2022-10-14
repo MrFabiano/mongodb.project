@@ -59,10 +59,12 @@ public class TutorialController {
                                                                             @RequestParam(required = false) String description, 
                                                                             @RequestParam(required = false) boolean publiched) {
 
-       
-          
-        return new ResponseEntity<>(tutorialService.buscarTutotorial(tutorial, title, description, false), HttpStatus.OK);
-
+          try{
+              return new ResponseEntity<>(tutorialService.buscarTutotorial(tutorial, title, description, false),
+                      HttpStatus.OK);
+          }catch (Exception e){
+              return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+          }
     }
 }
 
