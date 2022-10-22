@@ -1,8 +1,11 @@
 package com.springboot.mongodb.project.service;
 
+import com.springboot.mongodb.project.model.Endereco;
 import com.springboot.mongodb.project.model.Tutorial;
 import com.springboot.mongodb.project.repository.TutorialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,5 +38,18 @@ public class TutorialService {
             tutorialRepository.findByTitleContaining(title, description, false);
         }
         return listTutorial;
+    }
+
+    @Bean
+    public CommandLineRunner run(ViaCEPClient client){
+        return args -> {
+            if(args.length > 0){
+                String cep = args[0];
+
+                Endereco endereco = client.buscaEnderecoPor(cep);
+
+                System.out.println(endereco);
+            }
+        };
     }
 }
