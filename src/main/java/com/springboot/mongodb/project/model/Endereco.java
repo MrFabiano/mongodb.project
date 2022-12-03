@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Endereco {
 
     @JsonProperty("cep")
@@ -16,7 +18,6 @@ public class Endereco {
     private String logradouro;
     @JsonProperty("complemento")
     private String complemento;
-
     @JsonProperty("numero")
     private String numero;
     @JsonProperty("bairro")
@@ -25,19 +26,6 @@ public class Endereco {
     private String localidade;
     @JsonProperty("uf")
     private String uf;
-
-    @Override
-    public String toString() {
-        return "Endereco{" +
-                "cep='" + cep + '\'' +
-                ", logradouro='" + logradouro + '\'' +
-                ", complemento='" + complemento + '\'' +
-                ", numero='" + numero + '\'' +
-                ", bairro='" + bairro + '\'' +
-                ", localidade='" + localidade + '\'' +
-                ", uf='" + uf + '\'' +
-                '}';
-    }
 }
 
 

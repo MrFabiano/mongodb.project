@@ -5,9 +5,12 @@ import com.springboot.mongodb.project.model.Endereco;
 import com.springboot.mongodb.project.service.ViaCEPClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -21,8 +24,10 @@ public class CepController {
     @GetMapping(value = "ws/{cep}/json", produces = "application/json")
     public ResponseEntity<Endereco> getCepList(@PathVariable String cep){
 
-        return Optional.ofNullable(client.buscaEnderecoPor(cep))
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+//        return Optional.of(client.buscaEnderecoPor(cep))
+//                .map(ResponseEntity::ok)
+//                .orElse(ResponseEntity.notFound().build());
+
+        return new ResponseEntity<>(Objects.requireNonNull(client.buscaEnderecoPor(cep)), HttpStatus.OK);
     }
 }
