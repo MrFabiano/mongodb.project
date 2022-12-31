@@ -5,7 +5,6 @@ import com.springboot.mongodb.project.repository.TutorialRepository;
 import com.springboot.mongodb.project.service.TutorialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +20,9 @@ public class TutorialController {
     @Autowired
     private TutorialService tutorialService;
 
-    public TutorialController(TutorialRepository tutorialRepository) {
+    public TutorialController(TutorialRepository tutorialRepository, TutorialService tutorialService) {
         this.tutorialRepository = tutorialRepository;
+        this.tutorialService = tutorialService;
     }
 
     @PostMapping(value = "/tutorials")
