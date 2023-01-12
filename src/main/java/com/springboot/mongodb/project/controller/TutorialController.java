@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -58,13 +59,11 @@ public class TutorialController {
     public  ResponseEntity<List<Tutorial>> readTutorials(Tutorial tutorial, @RequestParam(required = false) String title,
                                                                             @RequestParam(required = false) String description, 
                                                                             @RequestParam(required = false) boolean publiched) {
-        try{
-              return new ResponseEntity<>(tutorialService.buscarTutotorial(tutorial, title, description, false),
-                      HttpStatus.OK);
-          }catch (Exception e){
-              return new ResponseEntity<>(tutorialService.buscarTutotorial(tutorial, title, description, false),
-                      HttpStatus.INTERNAL_SERVER_ERROR);
-          }
+
+        return Optional.of(tutorialService.buscarTutotorial(tutorial, title, description, publiched))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+
     }
 }
 
