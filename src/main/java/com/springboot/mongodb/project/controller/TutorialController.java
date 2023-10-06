@@ -19,7 +19,7 @@ public class TutorialController {
     private final TutorialRepository tutorialRepository;
 
     @Autowired
-    private TutorialService tutorialService;
+    private final TutorialService tutorialService;
 
     public TutorialController(TutorialRepository tutorialRepository, TutorialService tutorialService) {
         this.tutorialRepository = tutorialRepository;
